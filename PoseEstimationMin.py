@@ -7,7 +7,7 @@ mpPose = mp.solutions.pose
 pose = mpPose.Pose()
 
 cap = cv2.VideoCapture(0)
-#cv2.VideoCapture('PoseVideos/1.mp4')
+#cap = cv2.VideoCapture('LofiLongMP.mp4')
 pTime = 0
 cTime = 0
 
