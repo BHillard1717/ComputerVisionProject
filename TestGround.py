@@ -4,7 +4,7 @@ from mss import mss
 from PIL import Image
 import HandTrackingModule as htm
 
-bounding_box = {'top': 0, 'left': 0, 'width': 1000, 'height': 2000}
+bounding_box = {'top': 0, 'left': 0, 'width': 2000, 'height': 2000}
 
 sct = mss()
 detectorHand = htm.handDetector()

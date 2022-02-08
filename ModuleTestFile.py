@@ -5,27 +5,35 @@ import keyboard
 
 import HandTrackingModule as htm
 import PoseEstimationModule as pem
+import FaceMeshModule as fmm
 
 cap = cv2.VideoCapture(0)
 detectorHand = htm.handDetector()
 detectorPose = pem.poseDetector()
+detectorMesh = fmm.meshMaker()
 
 pTime = 0
 cTime = 0
 detectHand = True
 detectPose = True
+detectMesh = False
 targetPoint = 0
 
 while True:
     if keyboard.is_pressed('q'):
         exit(0)
     elif keyboard.is_pressed(' '):
-        detectHand = not detectHand
-        detectPose = not detectPose
+        detectHand = False
+        detectPose = False
+        detectMesh = False
         print("Switching Mode: Take finger Off Key")
         time.sleep(1)
     elif keyboard.is_pressed('p'):
         detectPose = not detectPose
+        print("Switching Mode: Take finger Off Key")
+        time.sleep(1)
+    elif keyboard.is_pressed('m'):
+        detectMesh = not detectMesh
         print("Switching Mode: Take finger Off Key")
         time.sleep(1)
     elif keyboard.is_pressed('h'):
@@ -45,6 +53,10 @@ while True:
         if len(lmList) != 0:
             if lmList[targetPoint]:
                 print(lmList[targetPoint])
+    if detectMesh:
+        img = detectorMesh.makeMesh(img)
+        lmList = detectorMesh.findPosition(img)
+
     cTime = time.time()
     fps = 1 / (cTime - pTime)
     pTime = cTime
